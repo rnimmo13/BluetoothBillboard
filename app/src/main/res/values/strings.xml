@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BluetoothBillboard</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_view_post_list_screen">view_post_list_screen</string>
+    <string name="title_activity_post_screen">post_screen</string>
+    <string name="title_activity_saved_boards_screen">saved_boards_screen</string>
+    <string name="title_activity_saved_posts_screen">saved_posts_screen</string>
+    <string name="title_activity_search_screen">search_screen</string>
+    <string name="title_activity_login_screen">login_screen</string>
+    <string name="title_activity_view_board_list_screen">view_board_list_screen</string>
+    <string name="title_activity_bans_screen">bans_screen</string>
+</resources>
