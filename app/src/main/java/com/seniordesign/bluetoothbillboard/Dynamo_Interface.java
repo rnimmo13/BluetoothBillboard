@@ -2,7 +2,7 @@ package com.seniordesign.bluetoothbillboard;
 
 import android.app.AlertDialog;
 import android.util.Log;
-
+import android.content.Context;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapperConfig;
@@ -13,6 +13,8 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanLis
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
+import com.amazonaws.services.dynamodbv2.model.Condition;
 
 import java.net.InetAddress;
 import java.util.HashMap;
@@ -29,6 +31,12 @@ public class Dynamo_Interface {
     static String hash_key;              //name of the hash-key attribute for the table being queried
     static String current_board;         //name of the current board
     static Board full_board;               //the current board
+    static Context application_context;     //context of the application
+
+    public static void setApplication_context(Context appContext){
+        //set application context
+        application_context = appContext;
+    }
 
     public static void setTable_name(String name){
         //set table name
@@ -54,7 +62,7 @@ public class Dynamo_Interface {
         //sets current board and gets info for it
         current_board = newBoard;
         Log.i("Board set", "Current board set to " + current_board);
-        //full_board = [DynamoInterface getSingleBoardInformation:[currentBoard intValue]];
+        full_board = Dynamo_Interface.getSingle_board_information(Long.parseLong(current_board));
     }
 
     public static Board getCurrent_board_info(){
@@ -69,23 +77,23 @@ public class Dynamo_Interface {
 
     public static boolean getConnection(){
         //return connection status
-        return connection;
+        return isConnected();
     }
 
-    public boolean isConnected() {
+    public static boolean isConnected() {
         try {
-            InetAddress IPAddress = InetAddress.getByName("google.com");
-            if (IPAddress.equals("")) {
+            InetAddress IPAddress = InetAddress.getByName("www.google.com");
+            if (!IPAddress.equals("")) {
                 Log.i("Connected","Device is connected to the internet");
-                return false;
+                return true;
             } else {
                 Log.i("Disconnected","Device is not connected to the internet");
-                new AlertDialog.Builder(Application_Context.getAppContext())
+                new AlertDialog.Builder(application_context)
                         .setTitle("Not Connected")
                         .setMessage("Could not connect to the database.  Please verify your internet connection or try again later.")
                         .setPositiveButton("OK", null)
                         .show();
-                return true;
+                return false;
             }
         } catch (Exception e) {
             Log.e("Connection Error", "Error: " + e.toString());
@@ -98,7 +106,7 @@ public class Dynamo_Interface {
         Vector<Board> board_list = new Vector<Board>();
         //aws credentials
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
@@ -117,15 +125,16 @@ public class Dynamo_Interface {
     public static Board getSingle_board_information(long identifier){
         //returns a populated board
         Board identify_me = new Board();
+        identify_me.setBoard_ID(identifier);
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
         AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
         DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
         DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-                .withHashKeyValues(identifier);
+                .withHashKeyValues(identify_me);
         if(getConnection()) {
             PaginatedQueryList<Board> result = mapper.query(Board.class, queryExpression);
             Log.i("Scan Complete", "Database scan successful!");
@@ -137,16 +146,17 @@ public class Dynamo_Interface {
     public static Post getSingle_post(long identifier){
         //returns a single populated post
         Post check_post = new Post();
+        check_post.setPost_ID(identifier);
         String full_table_name = "Board" + getCurrent_board();
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
         AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
         DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
         DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-                .withHashKeyValues(identifier);
+                .withHashKeyValues(check_post);
         if(getConnection()) {
             PaginatedQueryList<Post> result = mapper.query(Post.class, queryExpression,
                     new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
@@ -162,7 +172,7 @@ public class Dynamo_Interface {
         String full_table_name = "Board" + getCurrent_board();
         //aws credentials
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
@@ -172,10 +182,15 @@ public class Dynamo_Interface {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         if (!filter.equals("")){
             //set the scan expression's filter if there is one
-            Map<String, AttributeValue> expressionAttributeValues =
-                    new HashMap<String, AttributeValue>();
-            expressionAttributeValues.put(":condition", new AttributeValue().withN(filter));
-            scanExpression.setFilterExpression("Post_Status = :condition");
+            //Map<String, AttributeValue> expressionAttributeValues =
+                    //new HashMap<String, AttributeValue>();
+            //expressionAttributeValues.put(":condition", new AttributeValue().withN(filter));
+            //scanExpression.setFilterExpression("Post_Status = :condition");
+            Condition scanCondition = new Condition()
+                    .withComparisonOperator(ComparisonOperator.EQ.toString())
+                            .withAttributeValueList(
+            new AttributeValue().withS(filter));
+            scanExpression.addFilterCondition("Post_Status", scanCondition);
         }
         if(getConnection()) {
             PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression,
@@ -190,7 +205,7 @@ public class Dynamo_Interface {
 
         String full_table_name = "Board" + getCurrent_board();
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
@@ -205,7 +220,7 @@ public class Dynamo_Interface {
         //remove a post from the database
         String full_table_name = "Board" + getCurrent_board();
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );
@@ -226,7 +241,7 @@ public class Dynamo_Interface {
         //verify moderator credentials
         Moderator database_credentials = new Moderator();
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                Application_Context.getAppContext(), // Context
+                application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
                 Regions.US_EAST_1 // Region
         );

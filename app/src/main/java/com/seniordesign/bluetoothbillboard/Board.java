@@ -1,6 +1,7 @@
 package com.seniordesign.bluetoothbillboard;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexHashKey;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 
@@ -21,7 +22,7 @@ public class Board {
     private long Moderator_ID;   //moderator identification number
     private Vector<Post> Posts;    //posts attached to the board
 
-    @DynamoDBIndexHashKey(attributeName = "Board_ID")
+    @DynamoDBHashKey(attributeName = "Board_ID")
     public long getBoard_ID() {
         return Board_ID;
     }

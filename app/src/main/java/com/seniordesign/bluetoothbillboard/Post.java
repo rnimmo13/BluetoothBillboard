@@ -1,7 +1,7 @@
 package com.seniordesign.bluetoothbillboard;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 
 /**
@@ -20,7 +20,7 @@ public class Post {
     private String Post_Type;      //type of post (predefined set)
     private String Post_Status;    //status of post (posted, queued, denied)
 
-    @DynamoDBIndexHashKey(attributeName = "Post_ID")
+    @DynamoDBHashKey(attributeName = "Post_ID")
     public long getPost_ID() {
         return Post_ID;
     }

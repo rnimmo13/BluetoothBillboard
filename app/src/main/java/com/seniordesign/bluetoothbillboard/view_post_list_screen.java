@@ -4,7 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import java.util.Vector;
 
 public class view_post_list_screen extends ActionBarActivity {
 
@@ -12,6 +12,12 @@ public class view_post_list_screen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_post_list_screen);
+        //Dynamo_Interface Tests  (all successful so far)
+        /*Dynamo_Interface.setCurrent_board("213411");
+        Vector<Board> boards = Dynamo_Interface.getAll_board_information();
+        Board myboard = Dynamo_Interface.getCurrent_board_info();
+        Board myposts = Dynamo_Interface.getFiltered_posts(Long.parseLong(Dynamo_Interface.getCurrent_board()), "Posted");
+        Post mypost = Dynamo_Interface.getSingle_post(myposts.getPosts().firstElement().getPost_ID());*/
     }
 
     @Override
