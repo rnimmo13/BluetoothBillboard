@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import java.util.Vector;
 
 public class view_post_list_screen extends ActionBarActivity {
@@ -12,12 +13,20 @@ public class view_post_list_screen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_post_list_screen);
-        //Dynamo_Interface Tests  (all successful so far)
-        /*Dynamo_Interface.setCurrent_board("213411");
+        /*//Dynamo_Interface Tests  (all successful so far)
+        Dynamo_Interface.setCurrent_board("213411");
         Vector<Board> boards = Dynamo_Interface.getAll_board_information();
-        Board myboard = Dynamo_Interface.getCurrent_board_info();
-        Board myposts = Dynamo_Interface.getFiltered_posts(Long.parseLong(Dynamo_Interface.getCurrent_board()), "Posted");
-        Post mypost = Dynamo_Interface.getSingle_post(myposts.getPosts().firstElement().getPost_ID());*/
+        Board my_board = Dynamo_Interface.getCurrent_board_info();
+        Board my_posts = Dynamo_Interface.getFiltered_posts(Long.parseLong(Dynamo_Interface.getCurrent_board()), "Posted");
+        Post my_post = Dynamo_Interface.getSingle_post(my_posts.getPosts().firstElement().getPost_ID());
+        //Device_Interface Tests
+        Device_Interface device_database = new Device_Interface(getApplicationContext());
+        device_database.save_Post(my_posts.getPosts().firstElement());
+        device_database.get_Posts();
+        device_database.delete_Post(my_posts.getPosts().firstElement());
+        device_database.save_Board(Dynamo_Interface.full_board);
+        device_database.get_Boards();
+        device_database.delete_Board(Dynamo_Interface.full_board);*/
     }
 
     @Override

@@ -17,13 +17,15 @@ import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
 import com.amazonaws.services.dynamodbv2.model.Condition;
 
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
-/**
- * Created by Eric Anderson on 7/5/2015.
+/*
+    Handles all communication with the remote database.
+
+     Created by Eric Anderson on 7/5/2015.
  */
+
+@SuppressWarnings({"unchecked", "unused"})
 public class Dynamo_Interface {
 
     static boolean connection = false;        //state of the device's internet connection
@@ -83,7 +85,7 @@ public class Dynamo_Interface {
     public static boolean isConnected() {
         try {
             InetAddress IPAddress = InetAddress.getByName("www.google.com");
-            if (!IPAddress.equals("")) {
+            if (!IPAddress.toString().equals("")) {
                 Log.i("Connected","Device is connected to the internet");
                 return true;
             } else {
@@ -103,7 +105,7 @@ public class Dynamo_Interface {
 
     public static Vector<Board> getAll_board_information(){
         //returns an array of boards, with fully populated information
-        Vector<Board> board_list = new Vector<Board>();
+        Vector<Board> board_list = new Vector<>();
         //aws credentials
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 application_context, // Context
@@ -117,7 +119,7 @@ public class Dynamo_Interface {
         if(getConnection()) {
             PaginatedScanList<Board> result = mapper.scan(Board.class, scanExpression);
             Log.i("Scan Complete", "Database scan successful!");
-            board_list = new Vector<Board>(result);
+            board_list = new Vector<>(result);
         }
         return board_list;
     }
@@ -182,10 +184,6 @@ public class Dynamo_Interface {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         if (!filter.equals("")){
             //set the scan expression's filter if there is one
-            //Map<String, AttributeValue> expressionAttributeValues =
-                    //new HashMap<String, AttributeValue>();
-            //expressionAttributeValues.put(":condition", new AttributeValue().withN(filter));
-            //scanExpression.setFilterExpression("Post_Status = :condition");
             Condition scanCondition = new Condition()
                     .withComparisonOperator(ComparisonOperator.EQ.toString())
                             .withAttributeValueList(
@@ -196,7 +194,7 @@ public class Dynamo_Interface {
             PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression,
                     new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
             Log.i("Scan Complete", "Database scan successful!");
-            filled_board.setPosts(new Vector<Post>(result));
+            filled_board.setPosts(new Vector<>(result));
         }
         return filled_board;
     }
