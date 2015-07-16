@@ -41,8 +41,13 @@
             android:label="@string/title_activity_login_screen" >
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".view_board_list_screen"
             android:label="@string/title_activity_view_board_list_screen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".bans_screen"
