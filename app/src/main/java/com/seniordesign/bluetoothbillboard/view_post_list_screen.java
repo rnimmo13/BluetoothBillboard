@@ -1,9 +1,11 @@
 package com.seniordesign.bluetoothbillboard;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.Vector;
 
@@ -36,6 +38,46 @@ public class view_post_list_screen extends ActionBarActivity {
         return true;
     }
 
+    public void intentViewPostListScreen(View view) {
+        Intent i = new Intent(this, view_post_list_screen.class);
+        startActivity(i);
+    }
+
+    public void intentPost(View view) {
+        Intent i = new Intent(this, post_screen.class);
+        startActivity(i);
+    }
+
+    public void intentSavedBoards(View view) {
+        Intent i = new Intent(this, saved_boards_screen.class);
+        startActivity(i);
+    }
+
+    public void intentSavedPosts(View view) {
+        Intent i = new Intent(this, saved_posts_screen.class);
+        startActivity(i);
+    }
+
+    public void intentSearch(View view) {
+        Intent i = new Intent(this, search_screen.class);
+        startActivity(i);
+    }
+
+    public void intentLogin(View view) {
+        Intent i = new Intent(this, login_screen.class);
+        startActivity(i);
+    }
+
+    public void intentViewBoardList(View view) {
+        Intent i = new Intent(this, view_board_list_screen.class);
+        startActivity(i);
+    }
+
+    public void intentBans(View view) {
+        Intent i = new Intent(this, bans_screen.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -50,4 +92,6 @@ public class view_post_list_screen extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
