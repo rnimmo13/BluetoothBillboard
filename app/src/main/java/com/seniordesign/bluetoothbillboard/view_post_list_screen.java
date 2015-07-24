@@ -6,22 +6,33 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.app.Activity;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Vector;
 
-public class view_post_list_screen extends ActionBarActivity {
+public class view_post_list_screen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_post_list_screen);
-        /*//Dynamo_Interface Tests  (all successful so far)
+        //Dynamo_Interface Tests  (all successful so far)
         Dynamo_Interface.setCurrent_board("213411");
         Vector<Board> boards = Dynamo_Interface.getAll_board_information();
         Board my_board = Dynamo_Interface.getCurrent_board_info();
         Board my_posts = Dynamo_Interface.getFiltered_posts(Long.parseLong(Dynamo_Interface.getCurrent_board()), "Posted");
         Post my_post = Dynamo_Interface.getSingle_post(my_posts.getPosts().firstElement().getPost_ID());
-        //Device_Interface Tests
+
+        ListAdapter postAdapter = new ArrayAdapter<Board> (this, android.R.layout.simple_list_item_1, boards);
+        ListView listview = (ListView) findViewById(R.id.listView);
+        listview.setAdapter(postAdapter);
+
+        /*//Device_Interface Tests
         Device_Interface device_database = new Device_Interface(getApplicationContext());
         device_database.save_Post(my_posts.getPosts().firstElement());
         device_database.get_Posts();
