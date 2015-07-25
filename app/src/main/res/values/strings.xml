@@ -11,4 +11,12 @@
     <string name="title_activity_login_screen">login_screen</string>
     <string name="title_activity_view_board_list_screen">view_board_list_screen</string>
     <string name="title_activity_bans_screen">bans_screen</string>
+    <string name= "action_title_ban_list">Ban List</string> 
+    <string name= "action_title_post_list">Post View</string>
+     <string name= "action_title_saved_post_list">Saved Posts</string>
+     <string name= "action_title_saved_board_list">Saved Boards</string> 
+    <string name= "action_title_board_list">Board List</string>
+     <string name= "action_title_post_submit">Submit Post</string>
+     <string name= "action_title_login">Login</string> 
+    <string name= "action_title_search">Search Boards</string>
 </resources>

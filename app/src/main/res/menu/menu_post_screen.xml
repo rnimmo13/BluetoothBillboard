@@ -2,6 +2,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.seniordesign.bluetoothbillboard.post_screen">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/view_post_action"
+        android:icon="@drawable/icon_action_view"
+        android:title="@string/action_title_post_list"
+        app:showAsAction="always" />
+    <item android:id="@+id/submit_post_action"
+        android:icon="@drawable/icon_action_post"
+        android:title="@string/action_title_post_submit"
+        app:showAsAction="always" />
+    <item android:id="@+id/saved_post_action"
+        android:icon="@drawable/icon_action_saved_posts"
+        android:title="@string/action_title_saved_post_list"
+        app:showAsAction="always" />
+    <item android:id="@+id/saved_board_action"
+        android:icon="@drawable/icon_action_saved_boards"
+        android:title="@string/action_title_saved_board_list"
+        app:showAsAction="always" />
+    <item android:id="@+id/board_list_action"
+        android:icon="@drawable/icon_action_boards"
+        android:title="@string/action_title_board_list"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/login_action"
+        android:icon="@drawable/icon_action_login"
+        android:title="@string/action_title_login"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/search_action"
+        android:icon="@drawable/icon_action_search"
+        android:title="@string/action_title_search"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/ban_list_action"
+        android:icon="@drawable/icon_action_ban"
+        android:title="@string/action_title_ban_list"
+        app:showAsAction="ifRoom" />
 </menu>
