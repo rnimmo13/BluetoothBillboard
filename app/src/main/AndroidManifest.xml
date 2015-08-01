@@ -12,11 +12,6 @@
         <activity
             android:name=".view_post_list_screen"
             android:label="@string/title_activity_view_post_list_screen" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".post_screen"
@@ -49,6 +44,19 @@
         <activity
             android:name=".view_post_screen"
             android:label="@string/title_activity_view_post_screen" >
+        </activity>
+        <activity
+            android:name=".splash_screen"
+            android:label="@string/title_activity_splash_screen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view_saved_post_screen"
+            android:label="@string/title_activity_view_saved_post_screen" >
         </activity>
     </application>
 

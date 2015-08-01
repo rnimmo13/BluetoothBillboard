@@ -9,6 +9,8 @@
     <string name = "title_activity_login_screen">login_screen</string>
     <string name = "title_activity_view_board_list_screen">view_board_list_screen</string>
     <string name = "title_activity_bans_screen">bans_screen</string>
+    <string name = "title_activity_view_post_screen">view_post_screen</string>
+    <string name = "title_activity_splash_screen">splash_screen</string>
     <string name = "action_title_ban_list">Ban List</string> 
     <string name = "action_title_post_list">Post View</string>
      <string name = "action_title_saved_post_list">Saved Posts</string>
@@ -25,6 +27,10 @@
     <string name = "button_deny_post">Deny</string>
     <string name = "button_block_host">Block Host</string>
     <string name = "button_block_type">Block Type</string>
+    <string name = "button_delete_post">Delete Post</string>
+    <string name = "button_back">Back</string>
+    <string name = "button_blocked_types">Blocked Types</string>
+    <string name = "button_blocked_hosts">Blocked Hosts</string>
     <string name = "text_overlay_host">Host Name</string>
     <string name = "text_overlay_email">Email Address (optional)</string>
     <string name = "text_overlay_address">Address (optional)</string>
@@ -41,7 +47,8 @@
     <string name = "label_details">Details: </string>
     <string name = "label_robot">I am not a robot!</string>
     <string name = "label_contact_details">View Contact Details</string>
-    <string name="title_activity_view_post_screen">view_post_screen</string>
+    <string name = "image_label_logo">Logo</string>
+    <string name="title_activity_view_saved_post_screen">view_saved_post_screen</string>
 
     <string name="hello_world">Hello world!</string>
 </resources>
