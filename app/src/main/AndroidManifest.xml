@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seniordesign.bluetoothbillboard" >
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon_logo"
@@ -12,6 +14,7 @@
             android:label="@string/title_activity_view_post_list_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,6 +45,10 @@
         <activity
             android:name=".bans_screen"
             android:label="@string/title_activity_bans_screen" >
+        </activity>
+        <activity
+            android:name=".view_post_screen"
+            android:label="@string/title_activity_view_post_screen" >
         </activity>
     </application>
 

@@ -4,15 +4,197 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.seniordesign.bluetoothbillboard.post_screen">
+    tools:context=".post_screen">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/text_overlay_host"
+        android:ems="10"
+        android:id="@+id/txtHost"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:editable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/txtEmail"
+        android:layout_below="@+id/txtHost"
+        android:layout_alignLeft="@+id/txtHost"
+        android:layout_alignStart="@+id/txtHost"
+        android:text="@string/text_overlay_email"
+        android:editable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:id="@+id/txtAddress"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:layout_alignStart="@+id/txtEmail"
+        android:text="@string/text_overlay_address"
+        android:editable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/txtPhone"
+        android:layout_below="@+id/txtAddress"
+        android:layout_alignLeft="@+id/txtAddress"
+        android:layout_alignStart="@+id/txtAddress"
+        android:text="@string/text_overlay_phone"
+        android:editable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/text_overlay_date"
+        android:ems="10"
+        android:id="@+id/txtDate"
+        android:editable="true"
+        android:layout_below="@+id/lblType"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Post Screen"
-        android:id="@+id/textView2"
-        android:layout_centerVertical="true"
+        android:text="@string/text_overlay_details"
+        android:id="@+id/txvDetails"
+        android:layout_alignRight="@+id/txtDate"
+        android:layout_alignEnd="@+id/txtDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/ckbRobot"
+        android:layout_below="@+id/lblDetails" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_preview_post"
+        android:id="@+id/btnPreview"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ckbRobot"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/lblDetails"
+        android:layout_toStartOf="@+id/lblDetails" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_submit_post"
+        android:id="@+id/btnSubmit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/txvDetails"
+        android:layout_alignEnd="@+id/txvDetails"
+        android:layout_toRightOf="@+id/lblDetails"
+        android:layout_toEndOf="@+id/lblDetails" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_robot"
+        android:id="@+id/ckbRobot"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_alignRight="@+id/txvDetails"
+        android:layout_alignEnd="@+id/txvDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_host"
+        android:id="@+id/lblHost"
+        android:layout_alignTop="@+id/txtHost"
+        android:layout_alignRight="@+id/lblEmail"
+        android:layout_alignEnd="@+id/lblEmail"
+        android:layout_above="@+id/txtEmail" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_details"
+        android:id="@+id/lblDetails"
+        android:layout_below="@+id/txtDate"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_email"
+        android:id="@+id/lblEmail"
+        android:layout_alignRight="@+id/lblAddress"
+        android:layout_alignEnd="@+id/lblAddress"
+        android:layout_below="@+id/lblHost"
+        android:layout_above="@+id/lblAddress" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_address"
+        android:id="@+id/lblAddress"
+        android:layout_below="@+id/txtEmail"
+        android:layout_toLeftOf="@+id/txtEmail"
+        android:layout_toStartOf="@+id/txtEmail"
+        android:layout_above="@+id/txtPhone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_phone"
+        android:id="@+id/lblPhone"
+        android:layout_below="@+id/lblAddress"
+        android:layout_alignRight="@+id/lblAddress"
+        android:layout_alignEnd="@+id/lblAddress"
+        android:layout_alignBottom="@+id/txtPhone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_type"
+        android:id="@+id/lblType"
+        android:layout_below="@+id/lblPhone"
+        android:layout_alignRight="@+id/lblPhone"
+        android:layout_alignEnd="@+id/lblPhone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_date"
+        android:id="@+id/lblDate"
+        android:layout_below="@+id/lblType"
+        android:layout_alignRight="@+id/lblType"
+        android:layout_alignEnd="@+id/lblType"
+        android:layout_alignBottom="@+id/txtDate" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnType"
+        android:layout_below="@+id/txtPhone"
+        android:layout_alignLeft="@+id/txtPhone"
+        android:layout_alignStart="@+id/txtPhone"
+        android:layout_above="@+id/txtDate"
+        android:spinnerMode="dropdown" />
 
 </RelativeLayout>

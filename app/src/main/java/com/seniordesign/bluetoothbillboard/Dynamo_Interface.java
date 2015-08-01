@@ -34,6 +34,17 @@ public class Dynamo_Interface {
     static String current_board;         //name of the current board
     static Board full_board;               //the current board
     static Context application_context;     //context of the application
+    static Post selected_post;
+
+    public static void setSelected_post(Post chosen_post){
+        //set active post
+        selected_post = chosen_post;
+    }
+
+    public static Post getSelected_post(){
+        //return active post
+        return selected_post;
+    }
 
     public static void setApplication_context(Context appContext){
         //set application context

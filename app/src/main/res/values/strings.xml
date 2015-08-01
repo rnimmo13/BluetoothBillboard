@@ -1,22 +1,47 @@
 <resources>
-    <string name="app_name">BluetoothBillboard</string>
+    <string name = "app_name">BluetoothBillboard</string>
+    <string name = "action_settings">Settings</string>
+    <string name = "title_activity_view_post_list_screen">view_post_list_screen</string>
+    <string name = "title_activity_post_screen">post_screen</string>
+    <string name = "title_activity_saved_boards_screen">saved_boards_screen</string>
+    <string name = "title_activity_saved_posts_screen">saved_posts_screen</string>
+    <string name = "title_activity_search_screen">search_screen</string>
+    <string name = "title_activity_login_screen">login_screen</string>
+    <string name = "title_activity_view_board_list_screen">view_board_list_screen</string>
+    <string name = "title_activity_bans_screen">bans_screen</string>
+    <string name = "action_title_ban_list">Ban List</string> 
+    <string name = "action_title_post_list">Post View</string>
+     <string name = "action_title_saved_post_list">Saved Posts</string>
+     <string name = "action_title_saved_board_list">Saved Boards</string> 
+    <string name = "action_title_board_list">Board List</string>
+     <string name = "action_title_post_submit">Submit Post</string>
+     <string name = "action_title_login">Login</string> 
+    <string name = "action_title_search">Search Boards</string>
+    <string name = "button_save_board">Save Board</string>
+    <string name = "button_save_post">Save Post</string>
+    <string name = "button_submit_post">Submit Post</string>
+    <string name = "button_preview_post">Preview</string>
+    <string name = "button_accept_post">Accept</string>
+    <string name = "button_deny_post">Deny</string>
+    <string name = "button_block_host">Block Host</string>
+    <string name = "button_block_type">Block Type</string>
+    <string name = "text_overlay_host">Host Name</string>
+    <string name = "text_overlay_email">Email Address (optional)</string>
+    <string name = "text_overlay_address">Address (optional)</string>
+    <string name = "text_overlay_phone">Phone Number (optional)</string>
+    <string name = "text_overlay_type">Post Type</string>
+    <string name = "text_overlay_date">Date (optional)</string>
+    <string name = "text_overlay_details">Post Information</string>
+    <string name = "label_host">Host: </string>
+    <string name = "label_email">E-mail: </string>
+    <string name = "label_address">Address: </string>
+    <string name = "label_phone">Phone: </string>
+    <string name = "label_type">Post Type: </string>
+    <string name = "label_date">Date: </string>
+    <string name = "label_details">Details: </string>
+    <string name = "label_robot">I am not a robot!</string>
+    <string name = "label_contact_details">View Contact Details</string>
+    <string name="title_activity_view_post_screen">view_post_screen</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_view_post_list_screen">view_post_list_screen</string>
-    <string name="title_activity_post_screen">post_screen</string>
-    <string name="title_activity_saved_boards_screen">saved_boards_screen</string>
-    <string name="title_activity_saved_posts_screen">saved_posts_screen</string>
-    <string name="title_activity_search_screen">search_screen</string>
-    <string name="title_activity_login_screen">login_screen</string>
-    <string name="title_activity_view_board_list_screen">view_board_list_screen</string>
-    <string name="title_activity_bans_screen">bans_screen</string>
-    <string name= "action_title_ban_list">Ban List</string> 
-    <string name= "action_title_post_list">Post View</string>
-     <string name= "action_title_saved_post_list">Saved Posts</string>
-     <string name= "action_title_saved_board_list">Saved Boards</string> 
-    <string name= "action_title_board_list">Board List</string>
-     <string name= "action_title_post_submit">Submit Post</string>
-     <string name= "action_title_login">Login</string> 
-    <string name= "action_title_search">Search Boards</string>
 </resources>

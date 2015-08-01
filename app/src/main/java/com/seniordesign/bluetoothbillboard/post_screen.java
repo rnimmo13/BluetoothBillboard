@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class post_screen extends AppCompatActivity {
@@ -13,17 +15,22 @@ public class post_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_post_list_screen);
+        setContentView(R.layout.activity_post_screen);
         android.support.v7.app.ActionBar title_Bar = getSupportActionBar();
         assert getSupportActionBar() != null;
         title_Bar.setTitle("Submit Post");
+        String types[] = {"Event", "Announcement", "Employment", "Coupon", "Sales", "Services", "Other"};
+        Spinner spinType = (Spinner) findViewById(R.id.spnType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinType.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_view_post_list_screen, menu);
+        inflater.inflate(R.menu.menu_post_screen, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
