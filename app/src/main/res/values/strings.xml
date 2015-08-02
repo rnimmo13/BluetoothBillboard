@@ -31,6 +31,7 @@
     <string name = "button_back">Back</string>
     <string name = "button_blocked_types">Blocked Types</string>
     <string name = "button_blocked_hosts">Blocked Hosts</string>
+    <string name = "button_login">Login</string>
     <string name = "text_overlay_host">Host Name</string>
     <string name = "text_overlay_email">Email Address (optional)</string>
     <string name = "text_overlay_address">Address (optional)</string>
@@ -38,6 +39,9 @@
     <string name = "text_overlay_type">Post Type</string>
     <string name = "text_overlay_date">Date (optional)</string>
     <string name = "text_overlay_details">Post Information</string>
+    <string name = "text_overlay_search">Search</string>
+    <string name = "text_overlay_username">Username</string>
+    <string name = "text_overlay_password">Password</string>
     <string name = "label_host">Host: </string>
     <string name = "label_email">E-mail: </string>
     <string name = "label_address">Address: </string>
@@ -47,8 +51,13 @@
     <string name = "label_details">Details: </string>
     <string name = "label_robot">I am not a robot!</string>
     <string name = "label_contact_details">View Contact Details</string>
+    <string name = "label_username">Username: </string>
+    <string name = "label_password">Password: </string>
+    <string name = "label_failures">Login Failures</string>
+    <string name = "label_bypass">Login Bypass</string>
     <string name = "image_label_logo">Logo</string>
     <string name="title_activity_view_saved_post_screen">view_saved_post_screen</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_queue_list_screen">view_queue_list_screen</string>
+    <string name="title_activity_view_queued_post_screen">view_queued_post_screen</string>
+    <string name="title_activity_preview_post_screen">preview_post_screen</string>
 </resources>

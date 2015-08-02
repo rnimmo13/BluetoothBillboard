@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
+@SuppressWarnings("unchecked")
 public class saved_posts_screen extends AppCompatActivity {
 
     Vector<Post> saved_posts;
@@ -29,12 +30,9 @@ public class saved_posts_screen extends AppCompatActivity {
         assert getSupportActionBar() != null;
         title_Bar.setTitle("Saved Posts");
 
-
         Device_Interface device_link = new Device_Interface(saved_posts_screen.this);
         saved_posts = device_link.get_Posts();
-
-        @SuppressWarnings("unchecked")
-        ArrayAdapter post_adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, android.R.id.text1, saved_posts) {
+        final ArrayAdapter post_adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, android.R.id.text1, saved_posts) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -70,6 +68,9 @@ public class saved_posts_screen extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 Device_Interface device_link = new Device_Interface(saved_posts_screen.this);
                                 device_link.delete_Post(info_post);
+                                post_adapter.clear();
+                                post_adapter.addAll(device_link.get_Boards());
+                                post_adapter.notifyDataSetChanged();
                             }
                         })
                         .show();

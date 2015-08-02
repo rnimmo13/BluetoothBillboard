@@ -1,10 +1,8 @@
 package com.seniordesign.bluetoothbillboard;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,67 +15,44 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
-@SuppressWarnings("unchecked")
-public class saved_boards_screen extends AppCompatActivity {
+public class view_queue_list_screen extends AppCompatActivity {
 
-    Vector<Board> saved_boards;
+    Board my_board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_boards_screen);
+        setContentView(R.layout.activity_view_queue_list_screen);
         android.support.v7.app.ActionBar title_Bar = getSupportActionBar();
         assert getSupportActionBar() != null;
-        title_Bar.setTitle("Saved Boards");
+        title_Bar.setTitle("Queue List");
 
-        Device_Interface device_link = new Device_Interface(saved_boards_screen.this);
-        saved_boards = device_link.get_Boards();
+        my_board = Dynamo_Interface.getFiltered_posts(Dynamo_Interface.getCurrent_board_info().getBoard_ID(), "Queued");
 
-        final ArrayAdapter board_adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, android.R.id.text1, saved_boards) {
+        @SuppressWarnings("unchecked")
+        ArrayAdapter postAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, android.R.id.text1, my_board.getPosts()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(saved_boards.get(position).getBoard_Name());
-                text2.setText(saved_boards.get(position).getInstructions());
+                text1.setText(my_board.getPosts().get(position).getHost());
+                text2.setText(my_board.getPosts().get(position).getInformation());
                 text2.setSingleLine();
                 return view;
             }
         };
-        ListView list_view = (ListView) findViewById(R.id.lstBoards);
-        list_view.setAdapter(board_adapter);
+        ListView list_view = (ListView) findViewById(R.id.lstQueued);
+        list_view.setAdapter(postAdapter);
         list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Board selected_board = (saved_boards.get(position));
-                Dynamo_Interface.setCurrent_board(Long.toString(selected_board.getBoard_ID()));
-                startActivity(new Intent(saved_boards_screen.this, view_post_list_screen.class));
+                Post selected_post = (my_board.getPosts().get(position));
+                Dynamo_Interface.setSelected_post(selected_post);
+                startActivity(new Intent(view_queue_list_screen.this, view_queued_post_screen.class));
             }
-        });
-        list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final Board info_board = saved_boards.get(position);
-                new AlertDialog.Builder(saved_boards_screen.this)
-                        .setTitle(info_board.getBoard_Name())
-                        .setMessage("Organization\n" + info_board.getOrganization() + "\nInstructions\n" + info_board.getInstructions())
-                        .setPositiveButton("OK",null)
-                        .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                Device_Interface device_link = new Device_Interface(saved_boards_screen.this);
-                                device_link.delete_Board(info_board);
-                                board_adapter.clear();
-                                board_adapter.addAll(device_link.get_Boards());
-                                board_adapter.notifyDataSetChanged();
-                            }
-                        })
-                        .show();
-                return true;
-            }
-
         });
     }
 
@@ -85,7 +60,7 @@ public class saved_boards_screen extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_saved_boards_screen, menu);
+        inflater.inflate(R.menu.menu_view_queue_list_screen, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

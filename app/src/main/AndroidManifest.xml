@@ -58,6 +58,18 @@
             android:name=".view_saved_post_screen"
             android:label="@string/title_activity_view_saved_post_screen" >
         </activity>
+        <activity
+            android:name=".view_queue_list_screen"
+            android:label="@string/title_activity_view_queue_list_screen" >
+        </activity>
+        <activity
+            android:name=".view_queued_post_screen"
+            android:label="@string/title_activity_view_queued_post_screen" >
+        </activity>
+        <activity
+            android:name=".preview_post_screen"
+            android:label="@string/title_activity_preview_post_screen" >
+        </activity>
     </application>
 
 </manifest>
