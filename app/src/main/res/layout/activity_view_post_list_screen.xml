@@ -21,7 +21,6 @@
         android:text="@string/button_save_board"
         android:id="@+id/btnSaveBoard"
         android:textColor="#ffffff"
-        android:background="#002ca0"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="onClick_btnSaveBoard" />

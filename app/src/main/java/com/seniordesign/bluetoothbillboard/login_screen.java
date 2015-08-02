@@ -102,6 +102,7 @@ public class login_screen extends AppCompatActivity {
             login_info.setUsername(username.getText().toString());
             login_info.setPassword(password.getText().toString());
             if(Dynamo_Interface.verify_credentials(login_info)){
+                Dynamo_Interface.remove_outdated();
                 startActivity(new Intent(login_screen.this, view_queue_list_screen.class));
             }else{
                 new AlertDialog.Builder(login_screen.this)

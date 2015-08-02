@@ -5,12 +5,11 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.regions.Regions;
 
+@SuppressWarnings("unused")
 public class splash_screen extends AppCompatActivity {
 
     @Override

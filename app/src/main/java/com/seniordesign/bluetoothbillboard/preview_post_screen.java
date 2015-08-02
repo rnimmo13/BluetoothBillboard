@@ -6,13 +6,49 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class preview_post_screen extends AppCompatActivity {
+
+    Post viewing_post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_post_screen);
+        android.support.v7.app.ActionBar title_Bar = getSupportActionBar();
+        assert getSupportActionBar() != null;
+        title_Bar.setTitle("Preview Post");
+
+        viewing_post = Dynamo_Interface.getSelected_post();
+        CheckBox check_details = (CheckBox) findViewById(R.id.ckbDetails);
+        final ScrollView detail_view = (ScrollView) findViewById(R.id.scvDetails);
+        check_details.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    detail_view.setVisibility(View.VISIBLE);
+                }
+                else {
+                    detail_view.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        TextView host_name = (TextView) findViewById(R.id.lblHost);
+        TextView post_details = (TextView) findViewById(R.id.txvDetails);
+        TextView email = (TextView) findViewById(R.id.txtEmail);
+        TextView phone = (TextView) findViewById(R.id.txtPhone);
+        TextView address = (TextView) findViewById(R.id.txtAddress);
+        host_name.setText(viewing_post.getHost());
+        post_details.setText(viewing_post.getInformation());
+        email.setText(viewing_post.getEmail());
+        phone.setText(Long.toString(viewing_post.getPhone()));
+        address.setText(viewing_post.getAddress());
     }
 
     @Override
@@ -54,5 +90,10 @@ public class preview_post_screen extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void onClick_btnPreviewedSubmit(View view){
+        Dynamo_Interface.save_post(Dynamo_Interface.getSelected_post());
+        startActivity(new Intent(preview_post_screen.this, post_screen.class));
     }
 }

@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Vector;
-
 public class view_queue_list_screen extends AppCompatActivity {
 
     Board my_board;

@@ -17,6 +17,11 @@ import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
 import com.amazonaws.services.dynamodbv2.model.Condition;
 
 import java.net.InetAddress;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 
 /*
@@ -34,7 +39,8 @@ public class Dynamo_Interface {
     static String current_board;         //name of the current board
     static Board full_board;               //the current board
     static Context application_context;     //context of the application
-    static Post selected_post;
+    static Post selected_post;          //the current post
+    static String TAG = "Dynamo Interface";     //Log information tag
 
     public static void setSelected_post(Post chosen_post){
         //set active post
@@ -74,7 +80,7 @@ public class Dynamo_Interface {
     public static void setCurrent_board(String newBoard){
         //sets current board and gets info for it
         current_board = newBoard;
-        Log.i("Board set", "Current board set to " + current_board);
+        Log.i(TAG, "Current board set to " + current_board);
         full_board = Dynamo_Interface.getSingle_board_information(Long.parseLong(current_board));
     }
 
@@ -97,10 +103,10 @@ public class Dynamo_Interface {
         try {
             InetAddress IPAddress = InetAddress.getByName("www.google.com");
             if (!IPAddress.toString().equals("")) {
-                Log.i("Connected","Device is connected to the internet");
+                Log.i(TAG,"Device is connected to the internet");
                 return true;
             } else {
-                Log.i("Disconnected","Device is not connected to the internet");
+                Log.i(TAG,"Device is not connected to the internet");
                 new AlertDialog.Builder(application_context)
                         .setTitle("Not Connected")
                         .setMessage("Could not connect to the database.  Please verify your internet connection or try again later.")
@@ -109,7 +115,7 @@ public class Dynamo_Interface {
                 return false;
             }
         } catch (Exception e) {
-            Log.e("Connection Error", "Error: " + e.toString());
+            Log.e(TAG, "Error: " + e.toString());
             return false;
         }
     }
@@ -129,7 +135,7 @@ public class Dynamo_Interface {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         if(getConnection()) {
             PaginatedScanList<Board> result = mapper.scan(Board.class, scanExpression);
-            Log.i("Scan Complete", "Database scan successful!");
+            Log.i(TAG, "Database scan successful!");
             board_list = new Vector<>(result);
         }
         return board_list;
@@ -150,7 +156,7 @@ public class Dynamo_Interface {
                 .withHashKeyValues(identify_me);
         if(getConnection()) {
             PaginatedQueryList<Board> result = mapper.query(Board.class, queryExpression);
-            Log.i("Scan Complete", "Database scan successful!");
+            Log.i(TAG, "Database scan successful!");
             identify_me = result.get(0);
         }
         return identify_me;
@@ -173,7 +179,7 @@ public class Dynamo_Interface {
         if(getConnection()) {
             PaginatedQueryList<Post> result = mapper.query(Post.class, queryExpression,
                     new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
-            Log.i("Scan Complete", "Database scan successful!");
+            Log.i(TAG, "Database scan successful!");
             check_post = result.get(0);
         }
         return check_post;
@@ -204,7 +210,7 @@ public class Dynamo_Interface {
         if(getConnection()) {
             PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression,
                     new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
-            Log.i("Scan Complete", "Database scan successful!");
+            Log.i(TAG, "Database scan successful!");
             filled_board.setPosts(new Vector<>(result));
         }
         return filled_board;
@@ -222,7 +228,7 @@ public class Dynamo_Interface {
         DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 
         mapper.save(save_me, new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
-        Log.i("Post Saved","Post has been saved.");
+        Log.i(TAG,"Post has been saved.");
     }
 
     public static void delete_post(Post delete_me){
@@ -237,13 +243,62 @@ public class Dynamo_Interface {
         DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 
         mapper.delete(delete_me, new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
-        Log.i("Post Deleted", "Post has been deleted.");
+        Log.i(TAG, "Post has been deleted.");
     }
 
     public static void remove_outdated(){
         //remove outdated posts from the current board
-        //will fill out when I learn how to manipulate date
-            //objects in java
+        Vector<Post> all_posts = new Vector<>();
+        boolean end_me;
+        String full_table_name = "Board" + getCurrent_board();
+        //aws credentials
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                application_context, // Context
+                "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
+                Regions.US_EAST_1 // Region
+        );
+        AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+        DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
+        //aws scan expression
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        //get all posts currently on the board
+        if(getConnection()) {
+            PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression,
+                    new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
+            Log.i(TAG, "Database scan successful!");
+            all_posts = new Vector<>(result);
+        }
+        //check all posts for date before today, or 'denied' status
+        for (int i = 0; i < all_posts.size(); i++) {
+            Date post_date = new Date();
+            end_me = false;
+            //check if post was denied
+            if (all_posts.get(i).getPost_Status().equals("Denied")) {
+                end_me = true;
+                Log.i(TAG, "Post has been previously denied.");
+            }
+            //format date from post
+            SimpleDateFormat format = new SimpleDateFormat("MMddyy", Locale.US);
+            try {
+                post_date = format.parse(Long.toString(all_posts.get(i).getEnd_Date()));
+            } catch (ParseException e) {
+                Log.i(TAG, "Could not parse date!");
+                Log.e(TAG, "Error: " + e.toString());
+            }
+            //get today's date
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(cal.getTime());
+            Date today = cal.getTime();
+            //check if post's date is before today
+            if (post_date.before(today)){
+                end_me = true;
+                Log.i(TAG, "Post is now outdated.");
+            }
+            //delete post from database
+            if (end_me){
+                Dynamo_Interface.delete_post(all_posts.get(i));
+            }
+        }
     }
 
     public static boolean verify_credentials(Moderator entered_credentials){
@@ -261,15 +316,15 @@ public class Dynamo_Interface {
                 .withHashKeyValues(database_credentials);
         if(getConnection()) {
             PaginatedQueryList<Moderator> result = mapper.query(Moderator.class, queryExpression);
-            Log.i("Query Complete", "Database query successful!");
+            Log.i(TAG, "Database query successful!");
             database_credentials = result.get(0);
         }
         if(entered_credentials.getUsername().equals(database_credentials.getUsername())
                 && entered_credentials.getPassword().equals(database_credentials.getPassword())){
-            Log.i("Valid Credentials","Proper moderator credentials entered.");
+            Log.i(TAG,"Proper moderator credentials entered.");
             return true;
         }else {
-            Log.i("Invalid Credentials", "Invalid moderator credentials entered.");
+            Log.i(TAG, "Invalid moderator credentials entered.");
             return false;
         }
     }

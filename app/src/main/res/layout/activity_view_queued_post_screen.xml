@@ -59,7 +59,7 @@
         android:layout_alignBottom="@+id/scvDetails" />
 
     <ScrollView
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/scvDetails"
         android:fillViewport="false"

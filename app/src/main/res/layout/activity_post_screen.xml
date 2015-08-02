@@ -10,13 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/text_overlay_host"
         android:ems="10"
         android:id="@+id/txtHost"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:editable="true" />
+        android:editable="true"
+        android:hint="@string/text_overlay_host" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,8 +27,8 @@
         android:layout_below="@+id/txtHost"
         android:layout_alignLeft="@+id/txtHost"
         android:layout_alignStart="@+id/txtHost"
-        android:text="@string/text_overlay_email"
-        android:editable="true" />
+        android:editable="true"
+        android:hint="@string/text_overlay_email" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,8 +39,8 @@
         android:layout_below="@+id/txtEmail"
         android:layout_alignLeft="@+id/txtEmail"
         android:layout_alignStart="@+id/txtEmail"
-        android:text="@string/text_overlay_address"
-        android:editable="true" />
+        android:editable="true"
+        android:hint="@string/text_overlay_address" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -51,67 +51,44 @@
         android:layout_below="@+id/txtAddress"
         android:layout_alignLeft="@+id/txtAddress"
         android:layout_alignStart="@+id/txtAddress"
-        android:text="@string/text_overlay_phone"
-        android:editable="true" />
+        android:editable="true"
+        android:hint="@string/text_overlay_phone" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/text_overlay_date"
         android:ems="10"
         android:id="@+id/txtDate"
         android:editable="true"
         android:layout_below="@+id/lblType"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:hint="@string/text_overlay_date" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_overlay_details"
-        android:id="@+id/txvDetails"
+        android:id="@+id/lblHost"
         android:layout_alignRight="@+id/txtDate"
         android:layout_alignEnd="@+id/txtDate"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/ckbRobot"
-        android:layout_below="@+id/lblDetails" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_preview_post"
-        android:id="@+id/btnPreview"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/ckbRobot"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/lblDetails"
-        android:layout_toStartOf="@+id/lblDetails" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_submit_post"
-        android:id="@+id/btnSubmit"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/txvDetails"
-        android:layout_alignEnd="@+id/txvDetails"
-        android:layout_toRightOf="@+id/lblDetails"
-        android:layout_toEndOf="@+id/lblDetails" />
+        android:layout_below="@+id/lblDetails"
+        android:hint="@string/text_overlay_details"
+        android:inputType="text"
+        android:enabled="true"
+        android:gravity="left|top" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_robot"
         android:id="@+id/ckbRobot"
-        android:layout_above="@+id/btnSubmit"
-        android:layout_alignRight="@+id/txvDetails"
-        android:layout_alignEnd="@+id/txvDetails"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_above="@+id/tableRow3"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -122,7 +99,8 @@
         android:layout_alignTop="@+id/txtHost"
         android:layout_alignRight="@+id/lblEmail"
         android:layout_alignEnd="@+id/lblEmail"
-        android:layout_above="@+id/txtEmail" />
+        android:layout_above="@+id/txtEmail"
+        android:gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,7 +120,8 @@
         android:layout_alignRight="@+id/lblAddress"
         android:layout_alignEnd="@+id/lblAddress"
         android:layout_below="@+id/lblHost"
-        android:layout_above="@+id/lblAddress" />
+        android:layout_above="@+id/lblAddress"
+        android:gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -153,7 +132,8 @@
         android:layout_below="@+id/txtEmail"
         android:layout_toLeftOf="@+id/txtEmail"
         android:layout_toStartOf="@+id/txtEmail"
-        android:layout_above="@+id/txtPhone" />
+        android:layout_above="@+id/txtPhone"
+        android:gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -164,7 +144,8 @@
         android:layout_below="@+id/lblAddress"
         android:layout_alignRight="@+id/lblAddress"
         android:layout_alignEnd="@+id/lblAddress"
-        android:layout_alignBottom="@+id/txtPhone" />
+        android:layout_alignBottom="@+id/txtPhone"
+        android:gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -174,7 +155,8 @@
         android:id="@+id/lblType"
         android:layout_below="@+id/lblPhone"
         android:layout_alignRight="@+id/lblPhone"
-        android:layout_alignEnd="@+id/lblPhone" />
+        android:layout_alignEnd="@+id/lblPhone"
+        android:gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -185,7 +167,8 @@
         android:layout_below="@+id/lblType"
         android:layout_alignRight="@+id/lblType"
         android:layout_alignEnd="@+id/lblType"
-        android:layout_alignBottom="@+id/txtDate" />
+        android:layout_alignBottom="@+id/txtDate"
+        android:gravity="center_vertical" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -196,5 +179,29 @@
         android:layout_alignStart="@+id/txtPhone"
         android:layout_above="@+id/txtDate"
         android:spinnerMode="dropdown" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tableRow3">
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_preview_post"
+            android:id="@+id/btnPreview"
+            android:onClick="onClick_btnPreview" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_submit_post"
+            android:id="@+id/btnSubmit"
+            android:onClick="onClick_btnSubmit" />
+    </TableRow>
 
 </RelativeLayout>

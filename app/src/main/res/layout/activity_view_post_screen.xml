@@ -69,14 +69,12 @@
         android:layout_centerHorizontal="true" />
 
     <ScrollView
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/scvDetails"
         android:layout_above="@+id/ckbDetails"
         android:fillViewport="false"
         android:visibility="invisible"
-        android:layout_alignRight="@+id/txvDetails"
-        android:layout_alignEnd="@+id/txvDetails"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
