@@ -58,7 +58,7 @@ public class view_post_list_screen extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText(double_filtered.get(position).getHost());
-                text2.setText(double_filtered.get(position).getInformation());
+                text2.setText(android.text.Html.fromHtml(double_filtered.get(position).getInformation()).toString());
                 text2.setSingleLine();
                 return view;
             }

@@ -304,7 +304,7 @@ public class Dynamo_Interface {
     public static boolean verify_credentials(Moderator entered_credentials){
         //verify moderator credentials
         Moderator database_credentials = new Moderator();
-        database_credentials.setModerator_ID(full_board.getModerator_ID());
+        database_credentials.setModerator_ID(Long.toString(full_board.getModerator_ID()));
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 application_context, // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID

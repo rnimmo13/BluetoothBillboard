@@ -40,7 +40,7 @@ public class saved_posts_screen extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText(saved_posts.get(position).getHost());
-                text2.setText(saved_posts.get(position).getInformation());
+                text2.setText(android.text.Html.fromHtml(saved_posts.get(position).getInformation()).toString());
                 text2.setSingleLine();
                 return view;
             }

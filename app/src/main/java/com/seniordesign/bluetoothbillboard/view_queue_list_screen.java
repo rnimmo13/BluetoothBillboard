@@ -36,7 +36,7 @@ public class view_queue_list_screen extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText(my_board.getPosts().get(position).getHost());
-                text2.setText(my_board.getPosts().get(position).getInformation());
+                text2.setText(android.text.Html.fromHtml(my_board.getPosts().get(position).getInformation()).toString());
                 text2.setSingleLine();
                 return view;
             }

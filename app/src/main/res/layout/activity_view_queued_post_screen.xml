@@ -139,4 +139,16 @@
 
         </GridLayout>
     </ScrollView>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wbvWeb"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lblHost"
+        android:text="@string/text_overlay_details"
+        android:layout_alignBottom="@+id/scvDetails"
+        android:layout_alignParentLeft="true" />
+
 </RelativeLayout>

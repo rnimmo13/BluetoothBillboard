@@ -98,7 +98,7 @@ public class login_screen extends AppCompatActivity {
             failed_attempts++;
         }else{
             Moderator login_info = new Moderator();
-            login_info.setModerator_ID(Dynamo_Interface.getCurrent_board_info().getModerator_ID());
+            login_info.setModerator_ID(Long.toString(Dynamo_Interface.getCurrent_board_info().getModerator_ID()));
             login_info.setUsername(username.getText().toString());
             login_info.setPassword(password.getText().toString());
             if(Dynamo_Interface.verify_credentials(login_info)){

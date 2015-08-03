@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ScrollView;
@@ -49,6 +51,16 @@ public class preview_post_screen extends AppCompatActivity {
         email.setText(viewing_post.getEmail());
         phone.setText(Long.toString(viewing_post.getPhone()));
         address.setText(viewing_post.getAddress());
+        //handle html
+        WebView web_viewer = (WebView) findViewById(R.id.wbvWeb);
+        String stripped = viewing_post.getInformation().replaceAll("<(.|\n)*?>", "");
+        if (stripped.equals(viewing_post.getInformation())) {
+            post_details.setText(viewing_post.getInformation());
+            ((ViewGroup) web_viewer.getParent()).removeView(web_viewer);
+        }else{
+            web_viewer.loadData(viewing_post.getInformation(), "text/html", null);
+            ((ViewGroup) post_details.getParent()).removeView(post_details);
+        }
     }
 
     @Override
