@@ -188,7 +188,12 @@ public class Dynamo_Interface {
     public static Board getFiltered_posts(long identifier, String filter){
         //return all posts on a board using the filter
         Board filled_board = getSingle_board_information(Long.parseLong(current_board));
-        String full_table_name = "Board" + getCurrent_board();
+        String full_table_name;
+        if (identifier != 0) {
+            full_table_name = "Board" + getCurrent_board();
+        }else{
+            full_table_name = "Board000000";
+        }
         //aws credentials
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 application_context, // Context

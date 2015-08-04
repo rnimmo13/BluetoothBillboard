@@ -49,7 +49,8 @@
         android:layout_below="@+id/lblHost"
         android:text="@string/text_overlay_details"
         android:layout_alignBottom="@+id/scvDetails"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:scrollbars="vertical" />
 
     <CheckBox
         android:layout_width="wrap_content"

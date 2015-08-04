@@ -3,6 +3,7 @@ package com.seniordesign.bluetoothbillboard;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,6 +57,7 @@ public class preview_post_screen extends AppCompatActivity {
         String stripped = viewing_post.getInformation().replaceAll("<(.|\n)*?>", "");
         if (stripped.equals(viewing_post.getInformation())) {
             post_details.setText(viewing_post.getInformation());
+            post_details.setMovementMethod(new ScrollingMovementMethod());
             ((ViewGroup) web_viewer.getParent()).removeView(web_viewer);
         }else{
             web_viewer.loadData(viewing_post.getInformation(), "text/html", null);

@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -47,6 +48,19 @@ public class view_post_list_screen extends AppCompatActivity {
         for (int i = 0; i < my_board.getPosts().size(); i++){
             if (!type_list.contains(my_board.getPosts().get(i).getPost_Type()) && !host_list.contains(my_board.getPosts().get(i).getHost())) {
                 double_filtered.add(my_board.getPosts().get(i));
+            }
+        }
+        //perform a bubble sort of tutorial board only
+        if (my_board.getBoard_Name().equals("Tutorial") && double_filtered.size() > 1){
+            Post place_holder;
+            for (int i = 0; i < double_filtered.size(); i ++){
+                for (int j = 0; j < double_filtered.size() - 1; j++){
+                    if (double_filtered.get(j).getPost_ID() > double_filtered.get(j + 1).getPost_ID()){
+                        place_holder = double_filtered.get(j);
+                        double_filtered.set(j, double_filtered.get(j + 1));
+                        double_filtered.set(j + 1, place_holder);
+                    }
+                }
             }
         }
         @SuppressWarnings("unchecked")

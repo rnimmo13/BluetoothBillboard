@@ -32,7 +32,8 @@
         android:layout_below="@+id/lblHost"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/scvDetails" />
+        android:layout_alignBottom="@+id/scvDetails"
+        android:scrollbars="vertical"/>
 
     <CheckBox
         android:layout_width="wrap_content"
