@@ -10,7 +10,7 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.regions.Regions;
 
 @SuppressWarnings("unused")
-public class splash_screen extends AppCompatActivity {
+public class splash_screen extends AppCompatActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -114,10 +114,13 @@ public class login_screen extends AppCompatActivity {
             }
         }
         if (failed_attempts == 1){
+            failure.setVisibility(View.VISIBLE);
             failure.setText("You have failed to login 1 time.");
         }else if (failed_attempts > 1 && failed_attempts < 5){
+            failure.setVisibility(View.VISIBLE);
             failure.setText("You have failed to login " + failed_attempts + " times.");
         }else if (failed_attempts > 5){
+            failure.setVisibility(View.VISIBLE);
             failure.setText("You have reached the login failure limit.");
             login_button.setVisibility(View.INVISIBLE);
         }

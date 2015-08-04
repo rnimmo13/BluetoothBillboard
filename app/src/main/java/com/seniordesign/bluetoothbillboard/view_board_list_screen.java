@@ -36,7 +36,7 @@ public class view_board_list_screen extends AppCompatActivity {
         title_Bar.setTitle("Board List");
 
         Set<String> defaultSet = new HashSet<>();
-        SharedPreferences found_boards = view_board_list_screen.this.getSharedPreferences("already_found_boards", Context.MODE_PRIVATE);
+        SharedPreferences found_boards = view_board_list_screen.this.getSharedPreferences("found_beacons", Context.MODE_PRIVATE);
         ArrayList<String> type_list = new ArrayList<>(found_boards.getStringSet("boards", defaultSet));
         board_list = new Vector<>();
         for (int i = 0; i < type_list.size(); i++){

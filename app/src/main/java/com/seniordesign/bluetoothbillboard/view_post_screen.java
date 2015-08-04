@@ -2,6 +2,7 @@ package com.seniordesign.bluetoothbillboard;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -130,7 +131,11 @@ public class view_post_screen extends AppCompatActivity {
             new AlertDialog.Builder(view_post_screen.this)
                     .setTitle("Type Block")
                     .setMessage(viewing_post.getPost_Type() + " is now blocked.  Check the ban list screen to undo this action")
-                    .setPositiveButton("OK", null)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivity(new Intent(view_post_screen.this, view_post_list_screen.class));
+                        }
+                    })
                     .show();
         }else{
             new AlertDialog.Builder(view_post_screen.this)
@@ -139,7 +144,7 @@ public class view_post_screen extends AppCompatActivity {
                     .setPositiveButton("OK", null)
                     .show();
         }
-        startActivity(new Intent(this, view_post_list_screen.class));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +161,11 @@ public class view_post_screen extends AppCompatActivity {
             new AlertDialog.Builder(view_post_screen.this)
                     .setTitle("Host Block")
                     .setMessage(viewing_post.getHost() + " is now blocked.  Check the ban list screen to undo this action")
-                    .setPositiveButton("OK", null)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivity(new Intent(view_post_screen.this, view_post_list_screen.class));
+                        }
+                    })
                     .show();
         }else{
             new AlertDialog.Builder(view_post_screen.this)
@@ -165,6 +174,5 @@ public class view_post_screen extends AppCompatActivity {
                     .setPositiveButton("OK", null)
                     .show();
         }
-        startActivity(new Intent(this, view_post_list_screen.class));
     }
 }

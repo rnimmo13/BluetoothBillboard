@@ -24,7 +24,6 @@ import java.util.Set;
 @SuppressWarnings("unchecked")
 public class bans_screen extends AppCompatActivity {
 
-    int list_type;
     ArrayList<String> types;
     ArrayList<String> hosts;
 
@@ -36,7 +35,6 @@ public class bans_screen extends AppCompatActivity {
         assert getSupportActionBar() != null;
         title_Bar.setTitle("Ban List");
 
-        list_type = 0;
         Set<String> defaultSet = new HashSet<>();
         final SharedPreferences blocked_types = bans_screen.this.getSharedPreferences("blocked_types", Context.MODE_PRIVATE);
         types = new ArrayList<>(blocked_types.getStringSet("types", defaultSet));
@@ -44,58 +42,70 @@ public class bans_screen extends AppCompatActivity {
         hosts = new ArrayList<>(blocked_hosts.getStringSet("hosts", defaultSet));
 
 
-        ArrayAdapter block_adapter = new ArrayAdapter(bans_screen.this, android.R.layout.simple_list_item_1, hosts);
-        final ListView lstBlocked = (ListView) findViewById(R.id.lstBlocks);
-        lstBlocked.setAdapter(block_adapter);
-        lstBlocked.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ArrayAdapter host_adapter = new ArrayAdapter(bans_screen.this, android.R.layout.simple_list_item_1, hosts);
+        final ArrayAdapter type_adapter = new ArrayAdapter(bans_screen.this, android.R.layout.simple_list_item_1, types);
+
+        final ListView list_Hosts = (ListView) findViewById(R.id.lstHosts);
+        final ListView list_Types = (ListView) findViewById(R.id.lstTypes);
+        list_Hosts.setVisibility(View.VISIBLE);
+        list_Types.setVisibility(View.INVISIBLE);
+        list_Hosts.setAdapter(host_adapter);
+        list_Types.setAdapter(type_adapter);
+        list_Hosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(bans_screen.this)
+                        .setTitle("Un-Ban Host")
+                        .setMessage("Would you like to remove the ban on host " + hosts.get(position) + "?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                hosts.remove(position);
+                                Set updated_List = new HashSet(hosts);
+                                SharedPreferences.Editor editor = blocked_hosts.edit();
+                                editor.putStringSet("hosts", updated_List);
+                                editor.commit();
+                                new AlertDialog.Builder(bans_screen.this)
+                                        .setTitle("Un-Banned")
+                                        .setMessage("The host has been un-banned.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                                host_adapter.clear();
+                                host_adapter.addAll(hosts);
+                                host_adapter.notifyDataSetChanged();
+                                list_Hosts.setAdapter(host_adapter);
+                            }
+                        })
+                        .setNegativeButton("NO", null)
+                        .show();
+            }
+        });
 
-                if (list_type == 0){    //blocked hosts
-                    new AlertDialog.Builder(bans_screen.this)
-                            .setTitle("Un-Ban Host")
-                            .setMessage("Would you like to remove the ban on host " + hosts.get(position) + "?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    hosts.remove(position);
-                                    Set updated_List = new HashSet(hosts);
-                                    SharedPreferences.Editor editor = blocked_hosts.edit();
-                                    editor.putStringSet("hosts", updated_List);
-                                    editor.commit();
-                                    new AlertDialog.Builder(bans_screen.this)
-                                            .setTitle("Un-Banned")
-                                            .setMessage("The host has been un-banned.")
-                                            .setPositiveButton("OK", null)
-                                            .show();
-                                }
-                            })
-                            .setNegativeButton("NO", null)
-                            .show();
-                    onClick_btnBlock(lstBlocked);
-                    onClick_btnBlock(lstBlocked);
-                }else if (list_type == 1){  //blocked types
-                    new AlertDialog.Builder(bans_screen.this)
-                            .setTitle("Un-Ban Type")
-                            .setMessage("Would you like to remove the ban on type " + types.get(position) + "?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    types.remove(position);
-                                    Set updated_List = new HashSet(hosts);
-                                    SharedPreferences.Editor editor = blocked_types.edit();
-                                    editor.putStringSet("types", updated_List);
-                                    editor.commit();
-                                    new AlertDialog.Builder(bans_screen.this)
-                                            .setTitle("Un-Banned")
-                                            .setMessage("The type has been un-banned.")
-                                            .setPositiveButton("OK", null)
-                                            .show();
-                                }
-                            })
-                            .setNegativeButton("NO", null)
-                            .show();
-                    onClick_btnBlock(lstBlocked);
-                    onClick_btnBlock(lstBlocked);
-                }
+        list_Types.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(bans_screen.this)
+                        .setTitle("Un-Ban Type")
+                        .setMessage("Would you like to remove the ban on type " + types.get(position) + "?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                types.remove(position);
+                                Set updated_List = new HashSet(types);
+                                SharedPreferences.Editor editor = blocked_types.edit();
+                                editor.putStringSet("types", updated_List);
+                                editor.commit();
+                                new AlertDialog.Builder(bans_screen.this)
+                                        .setTitle("Un-Banned")
+                                        .setMessage("The type has been un-banned.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                                type_adapter.clear();
+                                type_adapter.addAll(types);
+                                type_adapter.notifyDataSetChanged();
+                                list_Types.setAdapter(type_adapter);
+                            }
+                        })
+                        .setNegativeButton("NO", null)
+                        .show();
             }
         });
     }
@@ -142,21 +152,24 @@ public class bans_screen extends AppCompatActivity {
     }
 
     public void onClick_btnBlock(View view){
-        ListView lstBlocked = (ListView) findViewById(R.id.lstBlocks);
+        ListView list_Hosts = (ListView) findViewById(R.id.lstHosts);
+        ListView list_Types = (ListView) findViewById(R.id.lstTypes);
         ArrayAdapter type_adapter = new ArrayAdapter(bans_screen.this, android.R.layout.simple_list_item_1, types);
         ArrayAdapter host_adapter = new ArrayAdapter(bans_screen.this, android.R.layout.simple_list_item_1, hosts);
         Button blocker = (Button) findViewById(R.id.btnBlock);
         TextView header = (TextView) findViewById(R.id.lblBlock);
-        if (list_type == 0){
+        if (list_Hosts.getVisibility() == View.VISIBLE){
             blocker.setText("Blocked Hosts");
             header.setText("Blocked Types");
-            lstBlocked.setAdapter(type_adapter);
-            list_type = 1;
-        }else if (list_type == 1){
+            list_Types.setAdapter(type_adapter);
+            list_Hosts.setVisibility(View.INVISIBLE);
+            list_Types.setVisibility(View.VISIBLE);
+        }else if (list_Types.getVisibility() == View.VISIBLE){
             blocker.setText("Blocked Types");
             header.setText("Blocked Hosts");
-            lstBlocked.setAdapter(host_adapter);
-            list_type = 0;
+            list_Hosts.setAdapter(host_adapter);
+            list_Hosts.setVisibility(View.VISIBLE);
+            list_Types.setVisibility(View.INVISIBLE);
         }
     }
 }
