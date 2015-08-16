@@ -20,7 +20,7 @@ import java.util.Vector;
 @SuppressWarnings("unchecked")
 public class saved_boards_screen extends AppCompatActivity {
 
-    Vector<Board> saved_boards;
+    private Vector<Board> saved_boards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class saved_boards_screen extends AppCompatActivity {
                 new AlertDialog.Builder(saved_boards_screen.this)
                         .setTitle(info_board.getBoard_Name())
                         .setMessage("Organization\n" + info_board.getOrganization() + "\nInstructions\n" + info_board.getInstructions())
-                        .setPositiveButton("OK",null)
+                        .setPositiveButton("No",null)
                         .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 Device_Interface device_link = new Device_Interface(saved_boards_screen.this);

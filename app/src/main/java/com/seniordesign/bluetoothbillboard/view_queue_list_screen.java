@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class view_queue_list_screen extends AppCompatActivity {
 
-    Board my_board;
+    private Board my_board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

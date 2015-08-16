@@ -31,7 +31,7 @@ import java.util.Vector;
  */
 
 @SuppressWarnings({"unchecked", "unused"})
-public class Dynamo_Interface {
+class Dynamo_Interface {
 
     static boolean connection = false;        //state of the device's internet connection
     static String table_name;            //name of the current table being queried
@@ -40,7 +40,7 @@ public class Dynamo_Interface {
     static Board full_board;               //the current board
     static Context application_context;     //context of the application
     static Post selected_post;          //the current post
-    static String TAG = "Dynamo Interface";     //Log information tag
+    static final String TAG = "Dynamo Interface";     //Log information tag
 
     public static void setSelected_post(Post chosen_post){
         //set active post
@@ -180,7 +180,12 @@ public class Dynamo_Interface {
             PaginatedQueryList<Post> result = mapper.query(Post.class, queryExpression,
                     new DynamoDBMapperConfig(new DynamoDBMapperConfig.TableNameOverride(full_table_name)));
             Log.i(TAG, "Database scan successful!");
-            check_post = result.get(0);
+            if (result.size() > 0) {
+                check_post = result.get(0);
+            }
+            else{
+                return null;
+            }
         }
         return check_post;
     }
@@ -322,7 +327,11 @@ public class Dynamo_Interface {
         if(getConnection()) {
             PaginatedQueryList<Moderator> result = mapper.query(Moderator.class, queryExpression);
             Log.i(TAG, "Database query successful!");
-            database_credentials = result.get(0);
+            if (result.size() > 0) {
+                database_credentials = result.get(0);
+            }else{
+                return false;
+            }
         }
         if(entered_credentials.getUsername().equals(database_credentials.getUsername())
                 && entered_credentials.getPassword().equals(database_credentials.getPassword())){

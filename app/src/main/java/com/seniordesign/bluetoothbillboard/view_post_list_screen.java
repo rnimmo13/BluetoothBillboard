@@ -18,15 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
 public class view_post_list_screen extends AppCompatActivity {
 
-    Board my_board;
-    Vector<Post> double_filtered;
+    private Vector<Post> double_filtered;
 
     @Override@SuppressWarnings("unused")
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class view_post_list_screen extends AppCompatActivity {
         SharedPreferences blocked_hosts = view_post_list_screen.this.getSharedPreferences("blocked_hosts", Context.MODE_PRIVATE);
         ArrayList<String> host_list = new ArrayList<>(blocked_hosts.getStringSet("hosts", defaultSet));
 
-        my_board = Dynamo_Interface.getFiltered_posts(Dynamo_Interface.getCurrent_board_info().getBoard_ID(), "Posted");
+        Board my_board = Dynamo_Interface.getFiltered_posts(Dynamo_Interface.getCurrent_board_info().getBoard_ID(), "Posted");
         double_filtered = new Vector<>();
         for (int i = 0; i < my_board.getPosts().size(); i++){
             if (!type_list.contains(my_board.getPosts().get(i).getPost_Type()) && !host_list.contains(my_board.getPosts().get(i).getHost())) {

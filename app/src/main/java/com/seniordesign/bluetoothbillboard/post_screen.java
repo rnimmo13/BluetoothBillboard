@@ -120,7 +120,7 @@ public class post_screen extends AppCompatActivity {
         dateText.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public boolean validateFields(){
+    private boolean validateFields(){
 
         TextView host_text = (TextView) findViewById(R.id.txtHost);
         TextView detail_text = (TextView) findViewById(R.id.lblHost);
@@ -158,7 +158,7 @@ public class post_screen extends AppCompatActivity {
         if (validateFields()){
             Post submit_me = new Post();
             TextView host_text = (TextView) findViewById(R.id.txtHost);
-            TextView detail_text = (TextView) findViewById(R.id.lblHost);
+            TextView detail_text = (TextView) findViewById(R.id.txvDetails);
             TextView date_text = (TextView) findViewById(R.id.txtDate);
             TextView address_text = (TextView) findViewById(R.id.txtAddress);
             TextView phone_text = (TextView) findViewById(R.id.txtPhone);
@@ -169,7 +169,7 @@ public class post_screen extends AppCompatActivity {
             submit_me.setHost(host_text.getText().toString());
             submit_me.setInformation(detail_text.getText().toString());
             submit_me.setPost_Type(type_spinner.getSelectedItem().toString());
-            if (address_text.getText().equals("")){
+            if (address_text.getText().toString().equals("")){
                 submit_me.setAddress(" ");
             }else{
                 submit_me.setAddress(address_text.getText().toString());
@@ -179,12 +179,12 @@ public class post_screen extends AppCompatActivity {
             }else{
                 submit_me.setPhone(0);
             }
-            if (email_text.getText().equals("")){
+            if (email_text.getText().toString().equals("")){
                 submit_me.setEmail(" ");
             }else{
                 submit_me.setEmail(email_text.getText().toString());
             }
-            if (date_text.getText().equals("")){
+            if (date_text.getText().toString().equals("")){
                 //set date to 90 days from today
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(cal.getTime());
@@ -217,7 +217,7 @@ public class post_screen extends AppCompatActivity {
         if (validateFields()){
             Post submit_me = new Post();
             TextView host_text = (TextView) findViewById(R.id.txtHost);
-            TextView detail_text = (TextView) findViewById(R.id.lblHost);
+            TextView detail_text = (TextView) findViewById(R.id.txvDetails);
             TextView date_text = (TextView) findViewById(R.id.txtDate);
             TextView address_text = (TextView) findViewById(R.id.txtAddress);
             TextView phone_text = (TextView) findViewById(R.id.txtPhone);
@@ -228,7 +228,7 @@ public class post_screen extends AppCompatActivity {
             submit_me.setHost(host_text.getText().toString());
             submit_me.setInformation(detail_text.getText().toString());
             submit_me.setPost_Type(type_spinner.getSelectedItem().toString());
-            if (address_text.getText().equals("")){
+            if (address_text.getText().toString().equals("")){
                 submit_me.setAddress(" ");
             }else{
                 submit_me.setAddress(address_text.getText().toString());
@@ -238,12 +238,12 @@ public class post_screen extends AppCompatActivity {
             }else{
                 submit_me.setPhone(0);
             }
-            if (email_text.getText().equals("")){
+            if (email_text.getText().toString().equals("")){
                 submit_me.setEmail(" ");
             }else{
                 submit_me.setEmail(email_text.getText().toString());
             }
-            if (date_text.getText().equals("")){
+            if (date_text.getText().toString().equals("")){
                 //set date to 90 days from today
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(cal.getTime());

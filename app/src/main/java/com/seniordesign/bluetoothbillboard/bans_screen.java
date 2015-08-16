@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "unused"})
 public class bans_screen extends AppCompatActivity {
 
-    ArrayList<String> types;
-    ArrayList<String> hosts;
+    private ArrayList<String> types;
+    private ArrayList<String> hosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

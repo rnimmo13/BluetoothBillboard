@@ -69,7 +69,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lblHost"
+        android:id="@+id/txvDetails"
         android:layout_alignRight="@+id/txtDate"
         android:layout_alignEnd="@+id/txtDate"
         android:layout_alignParentLeft="true"

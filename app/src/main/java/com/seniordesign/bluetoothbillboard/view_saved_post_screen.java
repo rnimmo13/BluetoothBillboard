@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class view_saved_post_screen extends AppCompatActivity {
 
-    Post viewing_post;
+    private Post viewing_post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

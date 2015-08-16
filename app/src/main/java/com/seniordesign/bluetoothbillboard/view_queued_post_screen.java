@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class view_queued_post_screen extends AppCompatActivity {
 
-    Post viewing_post;
+    private Post viewing_post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,14 +110,12 @@ public class view_queued_post_screen extends AppCompatActivity {
 
     public void onClick_btnDeny(View view){
         viewing_post.setPost_Status("Denied");
-        Device_Interface device_link = new Device_Interface(view_queued_post_screen.this);
-        device_link.save_Post(viewing_post);
-
+        Dynamo_Interface.save_post(viewing_post);
         if (!viewing_post.getEmail().equals(" ")) {
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setData(Uri.parse("mailto:"));
             emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, viewing_post.getEmail());
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{viewing_post.getEmail()});
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your post has been denied");
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Your post:\n" + viewing_post.getInformation() + "\n Has been denied.");
             try{
@@ -133,14 +131,12 @@ public class view_queued_post_screen extends AppCompatActivity {
 
     public void onClick_btnAccept(View view){
         viewing_post.setPost_Status("Posted");
-        Device_Interface device_link = new Device_Interface(view_queued_post_screen.this);
-        device_link.save_Post(viewing_post);
-
+        Dynamo_Interface.save_post(viewing_post);
         if (!viewing_post.getEmail().equals(" ")) {
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setData(Uri.parse("mailto:"));
             emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, viewing_post.getEmail());
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{viewing_post.getEmail()});
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your post has been approved");
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Your post:\n" + viewing_post.getInformation() + "\n Has been approved.");
             try{

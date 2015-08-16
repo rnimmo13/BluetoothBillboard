@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class login_screen extends AppCompatActivity {
 
-    int failed_attempts;
+    private int failed_attempts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

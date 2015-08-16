@@ -22,9 +22,9 @@ import java.util.Vector;
 @SuppressWarnings("unchecked")
 public class search_screen extends AppCompatActivity {
 
-    Vector<Board> all_boards;
-    Vector<Board> filtered_boards;
-    ArrayAdapter board_adapter;
+    private Vector<Board> all_boards;
+    private Vector<Board> filtered_boards;
+    private ArrayAdapter board_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

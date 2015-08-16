@@ -17,8 +17,6 @@ import android.widget.TextView;
 
 public class preview_post_screen extends AppCompatActivity {
 
-    Post viewing_post;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +25,7 @@ public class preview_post_screen extends AppCompatActivity {
         assert getSupportActionBar() != null;
         title_Bar.setTitle("Preview Post");
 
-        viewing_post = Dynamo_Interface.getSelected_post();
+        Post viewing_post = Dynamo_Interface.getSelected_post();
         CheckBox check_details = (CheckBox) findViewById(R.id.ckbDetails);
         final ScrollView detail_view = (ScrollView) findViewById(R.id.scvDetails);
         check_details.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

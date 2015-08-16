@@ -16,6 +16,9 @@ public class splash_screen extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        @SuppressWarnings("UnusedAssignment")
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(), // Context
                 "us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9", // Identity Pool ID
@@ -23,8 +26,6 @@ public class splash_screen extends AppCompatActivity{
         );
         Dynamo_Interface.setApplication_context(getApplicationContext());
         Dynamo_Interface.setCurrent_board("000000");
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
         int secondsDelayed = 1;
         new Handler().postDelayed(new Runnable() {
             public void run() {

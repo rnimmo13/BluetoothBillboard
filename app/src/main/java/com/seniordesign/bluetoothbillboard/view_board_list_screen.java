@@ -25,7 +25,7 @@ import java.util.Vector;
 
 public class view_board_list_screen extends AppCompatActivity {
 
-    Vector<Board> board_list;
+    private Vector<Board> board_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

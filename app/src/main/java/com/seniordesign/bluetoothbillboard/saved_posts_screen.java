@@ -20,7 +20,7 @@ import java.util.Vector;
 @SuppressWarnings("unchecked")
 public class saved_posts_screen extends AppCompatActivity {
 
-    Vector<Post> saved_posts;
+    private Vector<Post> saved_posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class saved_posts_screen extends AppCompatActivity {
                 new AlertDialog.Builder(saved_posts_screen.this)
                         .setTitle("Delete Post")
                         .setMessage("Would you like to delete this post from " + info_post.getHost() + "?")
-                        .setPositiveButton("OK", null)
+                        .setPositiveButton("No", null)
                         .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Device_Interface device_link = new Device_Interface(saved_posts_screen.this);
