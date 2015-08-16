@@ -57,7 +57,7 @@
             android:id="@+id/txtUsername"
             android:layout_column="1"
             android:layout_row="0"
-            android:text="@string/text_overlay_username" />
+            android:hint="@string/text_overlay_username" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:id="@+id/txtPassword"
             android:layout_column="1"
             android:layout_row="1"
-            android:text="@string/text_overlay_password" />
+            android:hint="@string/text_overlay_password" />
     </GridLayout>
 
     <TextView

@@ -78,7 +78,8 @@
         android:fillViewport="false"
         android:visibility="invisible"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="#5b9282">
 
         <GridLayout
             android:layout_width="wrap_content"

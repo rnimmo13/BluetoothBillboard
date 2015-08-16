@@ -47,7 +47,8 @@ public class search_screen extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 board_adapter.clear();
                 for (int i = 0; i < all_boards.size(); i ++){
-                    if(all_boards.get(i).getBoard_Name().toLowerCase().contains(s.toString().toLowerCase())){
+                    if(all_boards.get(i).getBoard_Name().toLowerCase().contains(s.toString().toLowerCase()) ||
+                            all_boards.get(i).getOrganization().toLowerCase().contains(s.toString().toLowerCase())){
                         filtered_boards.add(all_boards.get(i));
                     }
                 }
